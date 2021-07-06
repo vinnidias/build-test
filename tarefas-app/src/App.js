@@ -11,7 +11,7 @@ import axios from 'axios';
 function App() {
 
   
-  const [studentEmail, setEstudentEmail] = useState('5353@escolavereda.com.br')
+  const studentEmail = useState('5353@escolavereda.com.br')
   const [taskList, setTaskList] = useState([])
   const [studentName, setStudentName] = useState('')
   const [studentClass, setStudentClass] = useState('')
