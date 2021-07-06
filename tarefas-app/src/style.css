@@ -1,0 +1,42 @@
+body {
+  overflow-x: hidden;
+}
+
+.main-container {
+  margin-left: -10px;
+  max-width: 100%;
+}
+
+.grades-container {
+  padding: 10px 80px;
+  
+}
+
+.grades-container h1 {
+  font-weight: 600;
+  color: grey;
+  font-size: 18px;
+}
+
+.grades-container h2 {
+  font-weight: 500;
+  color: grey;
+  font-size: 18px;
+}
+
+.loading-container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.grades-container {
+  justify-content: center;
+  align-items: center;
+}
+
+@media(max-width: 780px) {
+  body {
+    overflow-x: auto;
+  }
+}
