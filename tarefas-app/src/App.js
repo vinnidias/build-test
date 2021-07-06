@@ -11,7 +11,7 @@ import axios from 'axios';
 function App() {
 
 
-  const studentEmail ='5353@escolavereda.com.br'
+  const studentEmail = '5353@escolavereda.com.br'
   const [taskList, setTaskList] = useState([])
   const [studentName, setStudentName] = useState('')
   const [studentClass, setStudentClass] = useState('')
@@ -61,34 +61,45 @@ function App() {
     }
   }
 
-  const getAppData = async (studentEmail, classAcronym ) => {
-    try {
-      const studentData = await axios.get(`https://apitarefasfinal.herokuapp.com/turma/${studentEmail}`)
+  
 
-      const studentName = studentData.data.displayName
-      const studentClass = studentData.data.jobTitle
-      setClassAcronym(studentClass)
-      setStudentName(studentName)
-      verifyClass(studentClass)
-      const path = await axios.get(`https://apitarefasfinal.herokuapp.com/foto/${studentEmail}`)
-      console.log('imagem', path)
-      const imagePath = path.data[0]
-      const type = path.data[1]
-      setImagePath(imagePath)
-      setStudentImage(type)
-      setLoading(false)
-      const tasks = await axios.get(`https://apitarefasfinal.herokuapp.com/tarefa/${classAcronym}`)
-      const list = tasks.data[0]
-      setTaskList(list)
-      setTasksLoading(false)
-    } catch (err) {
-      return
-    }
+  useEffect(()=> {
+    const getData = async () => {
+      try {
+        const studentData = await axios.get(`https://apitarefasfinal.herokuapp.com/turma/${studentEmail}`)
+  
+        const studentName = studentData.data.displayName
+        const studentClass = studentData.data.jobTitle
+        setClassAcronym(studentClass)
+        setStudentName(studentName)
+        verifyClass(studentClass)
+        const path = await axios.get(`https://apitarefasfinal.herokuapp.com/foto/${studentEmail}`)
+        console.log('imagem', path)
+        const imagePath = path.data[0]
+        const type = path.data[1]
+        setImagePath(imagePath)
+        setStudentImage(type)
+        setLoading(false)
+      } catch (err) {
+        return
+      }
   }
+   getData()
+  }, [])
 
-  useEffect(() => {
-    getAppData(studentEmail, classAcronym)
-  }, [classAcronym, loading])
+  useEffect(()=> {
+    const getTasks = async ()=> {
+      try {
+        const tasks = await axios.get(`https://apitarefasfinal.herokuapp.com/tarefa/${classAcronym}`)
+        const list = tasks.data[0]
+        setTaskList(list)
+        setTasksLoading(false)
+      } catch (err) {
+        return
+      }
+    }
+   getTasks()
+   }, [classAcronym, taskList, tasksLoading])
   return (
     <div className='main-container'>
       <Header

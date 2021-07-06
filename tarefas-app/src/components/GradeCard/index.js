@@ -38,28 +38,29 @@ export default function GradeCard({ subject, grade, studentEmail, studentClass }
 		}
 	}
 
-	const gatCardData = async () => {
-		try {
-			const taskData = await axios.get(`https://apitarefasfinal.herokuapp.com/tarefa/${studentClass}/${subjectPath}/${studentEmail}`)
-			const result = taskData.data
-			console.log('requisição das tarefas unicas', result)
-			const status = taskData.data.status
-			verifyStatus(status)
-			const comment = taskData.data.feedback
-			console.log('comentário da tarefa', comment)
-			verifyFeedback(comment)
-			const points = taskData.data[0].value[1].points.points
-			verifyPoints(points)
-
-		}
-		catch (err) {
-			return
-		}
-	}
 
 	useEffect(() => {
+		const gatCardData = async () => {
+			try {
+				const taskData = await axios.get(`https://apitarefasfinal.herokuapp.com/tarefa/${studentClass}/${subjectPath}/${studentEmail}`)
+				const result = taskData.data
+				console.log('requisição das tarefas unicas', result)
+				const status = taskData.data.status
+				verifyStatus(status)
+				const comment = taskData.data.feedback
+				console.log('comentário da tarefa', comment)
+				verifyFeedback(comment)
+				const points = taskData.data[0].value[1].points.points
+				verifyPoints(points)
+
+			}
+			catch (err) {
+				return
+			}
+		}
+
 		gatCardData()
-	}, [modalIsVisible, teacherComment])
+	}, [studentClass, studentEmail, subjectPath])
 
 	return (
 
