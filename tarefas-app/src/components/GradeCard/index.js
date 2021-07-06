@@ -14,7 +14,7 @@ export default function GradeCard({ subject, grade, studentEmail, studentClass }
 		if (feedback === null) {
 			setTeacherComment('Está tarefa não possui nenhum comentário do professor.')
 		} else {
-			
+
 			const adjustedComment = feedback.replace(/\n/g, ' ')
 			setTeacherComment(adjustedComment)
 		}
@@ -38,7 +38,7 @@ export default function GradeCard({ subject, grade, studentEmail, studentClass }
 		}
 	}
 
-	useEffect(async () => {
+	const gatCardData = async () => {
 		try {
 			const taskData = await axios.get(`https://apitarefasfinal.herokuapp.com/tarefa/${studentClass}/${subjectPath}/${studentEmail}`)
 			const result = taskData.data
@@ -55,6 +55,10 @@ export default function GradeCard({ subject, grade, studentEmail, studentClass }
 		catch (err) {
 			return
 		}
+	}
+
+	useEffect(() => {
+		gatCardData()
 	}, [modalIsVisible, teacherComment])
 
 	return (

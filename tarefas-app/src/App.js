@@ -10,7 +10,7 @@ import axios from 'axios';
 
 function App() {
 
-  
+
   const studentEmail = useState('5353@escolavereda.com.br')
   const [taskList, setTaskList] = useState([])
   const [studentName, setStudentName] = useState('')
@@ -20,7 +20,7 @@ function App() {
   const [imagePath, setImagePath] = useState('')
   const [loading, setLoading] = useState(true)
   const [tasksLoading, setTasksLoading] = useState(true)
-  
+
 
   const verifyClass = (string) => {
     if (string.includes('EF11')) {
@@ -61,11 +61,10 @@ function App() {
     }
   }
 
-  useEffect(async () => {
+  const getAppData = async () => {
     try {
-    
       const studentData = await axios.get(`https://apitarefasfinal.herokuapp.com/turma/${studentEmail}`)
-     
+
       const studentName = studentData.data.displayName
       const studentClass = studentData.data.jobTitle
       setClassAcronym(studentClass)
@@ -85,6 +84,10 @@ function App() {
     } catch (err) {
       return
     }
+  }
+
+  useEffect(() => {
+    getAppData()
   }, [classAcronym, loading])
   return (
     <div className='main-container'>
