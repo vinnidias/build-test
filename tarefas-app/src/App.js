@@ -11,7 +11,7 @@ import axios from 'axios';
 function App() {
 
 
-  const studentEmail = useState('5353@escolavereda.com.br')
+  const studentEmail ='5353@escolavereda.com.br'
   const [taskList, setTaskList] = useState([])
   const [studentName, setStudentName] = useState('')
   const [studentClass, setStudentClass] = useState('')
@@ -61,7 +61,7 @@ function App() {
     }
   }
 
-  const getAppData = async () => {
+  const getAppData = async (studentEmail, classAcronym ) => {
     try {
       const studentData = await axios.get(`https://apitarefasfinal.herokuapp.com/turma/${studentEmail}`)
 
@@ -87,7 +87,7 @@ function App() {
   }
 
   useEffect(() => {
-    getAppData()
+    getAppData(studentEmail, classAcronym)
   }, [classAcronym, loading])
   return (
     <div className='main-container'>
