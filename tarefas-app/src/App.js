@@ -27,7 +27,7 @@ function App() {
       setStudentClass('1º Ano Fundamental I')
     }
     if (string.includes('EF12')) {
-      setStudentClass('2º Ano Fundamental I')
+      setStudentClass('2º Ano Fundamental I - Testando build em produção')
     }
     if (string.includes('EF13')) {
       setStudentClass('3º Ano Fundamental I')
